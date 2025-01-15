@@ -1,0 +1,3 @@
+SELECT ProduktNummer, SUM(Preis * Verkaufsmenge) AS Gesamtumsatz
+FROM Verkäufe
+GROUP BY ProduktNummer;

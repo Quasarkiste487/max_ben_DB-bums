@@ -1,27 +1,31 @@
--- Verwendung des Schemas sicherstellen
--- In Oracle wird keine CREATE DATABASE-Anweisung verwendet
--- Arbeiten Sie direkt in Ihrem Schema
-
-DROP TABLE Kartell_Kunde;
-DROP TABLE Kartell_Mitarbeiter;
-DROP TABLE Chemiker;
-DROP TABLE Vertriebler;
-DROP TABLE Schmuggler;
-DROP TABLE Drogenart;
-DROP TABLE Labor;
-DROP TABLE Lager_Inventar;
-DROP TABLE Lagerart;
-DROP TABLE Produkt;
+-- Sicherstellen, dass alle Tabellen existieren und keine inkonsistenten Fremdschlüssel oder CHECK-Fehler auftreten
+DROP TABLE Kartell_Kunde CASCADE CONSTRAINTS;
+DROP TABLE Kartell_Mitarbeiter CASCADE CONSTRAINTS;
+DROP TABLE Chemiker CASCADE CONSTRAINTS;
+DROP TABLE Vertriebler CASCADE CONSTRAINTS;
+DROP TABLE Schmuggler CASCADE CONSTRAINTS;
+DROP TABLE Drogenart CASCADE CONSTRAINTS;
+DROP TABLE Labor CASCADE CONSTRAINTS;
+DROP TABLE Lager_Inventar CASCADE CONSTRAINTS;
+DROP TABLE Lagerart CASCADE CONSTRAINTS;
+DROP TABLE Produkt CASCADE CONSTRAINTS;
+DROP TABLE Wird_Hergestellt CASCADE CONSTRAINTS;
+DROP TABLE Wird_Verkauft CASCADE CONSTRAINTS;
+DROP TABLE verkauft CASCADE CONSTRAINTS;
+DROP TABLE transportiert CASCADE CONSTRAINTS;
+DROP TABLE kennt CASCADE CONSTRAINTS;
+DROP TABLE Kann_Herstellen CASCADE CONSTRAINTS;
+DROP TABLE besitzt CASCADE CONSTRAINTS;
 
 -- Tabelle: Kartell-Mitarbeiter
 CREATE TABLE Kartell_Mitarbeiter (
     MitarbeiterNummer VARCHAR2(10) PRIMARY KEY,
-    Name VARCHAR2(20) NOT NULL,
+    Name VARCHAR2(50) NOT NULL,  -- Erhöht, um längere Namen zu ermöglichen
     Status VARCHAR2(20) CHECK (Status IN ('verfügbar', 'beschäftigt', 'auf Regierungsliste', 'in Verwahrung')) NOT NULL,
-    Gehalt NUMBER(6,2),
+    Gehalt NUMBER(8,2),  -- Erhöht für größere Gehälter
     Eintrittsdatum DATE NOT NULL,
-    Telefonnummer VARCHAR2(12),
-    Adresse VARCHAR2(25) NOT NULL
+    Telefonnummer VARCHAR2(15),  -- Erhöht für internationale Nummern
+    Adresse VARCHAR2(100) NOT NULL  -- Erhöht für längere Adressen
 );
 
 -- Tabelle: Chemiker (Spezialisierung von Kartell-Mitarbeiter)
@@ -56,7 +60,7 @@ CREATE TABLE Vertriebler (
 
 -- Tabelle: Kartell-Kunde
 CREATE TABLE Kartell_Kunde (
-    Alias VARCHAR2(15) PRIMARY KEY,
+    Alias VARCHAR2(20) PRIMARY KEY,  -- Erhöht für längere Aliase
     Telefonnummer VARCHAR2(15) NOT NULL,
     Erstkaufdatum DATE NOT NULL,
     Einkaufsverlauf VARCHAR2(255)
@@ -95,18 +99,21 @@ CREATE TABLE Drogenart (
 -- Tabelle: Produkt
 CREATE TABLE Produkt (
     ProduktNummer VARCHAR2(6) PRIMARY KEY,
-    Preis NUMBER(5,2),
+    Preis NUMBER(8,2),  -- Erhöht für größere Preisspannen
     Herstellungsdatum DATE NOT NULL,
     Streckungsgrad NUMBER(3,0),
     Gefahrenpotenzial NUMBER(3,0) CHECK (Gefahrenpotenzial BETWEEN 0 AND 100),
-    CONSTRAINT fk_Produkt_Drogenart FOREIGN KEY (ProduktNummer) REFERENCES Drogenart(Bezeichnung)
+    Chemiker VARCHAR2(6),
+    Bezeichner VARCHAR2(20),
+    CONSTRAINT fk_Produkt_Bezeichnung FOREIGN KEY (Bezeichner) REFERENCES Drogenart(Bezeichnung),
+    CONSTRAINT fk_Produkt_ChemikerNummer FOREIGN KEY (Chemiker) REFERENCES Chemiker(ChemikerNummer)
 );
 
 -- Tabelle: Labor
 CREATE TABLE Labor (
     LaborNummer VARCHAR2(6) PRIMARY KEY,
-    Standort VARCHAR2(20) NOT NULL,
-    Ausstattung VARCHAR2(10),
+    Standort VARCHAR2(50) NOT NULL,  -- Erhöht für längere Standorte
+    Ausstattung VARCHAR2(50),
     Kochplaetze NUMBER(2,0) CHECK (Kochplaetze > 0),
     Sicherheitslevel NUMBER(1,0) CHECK (Sicherheitslevel BETWEEN 0 AND 9)
 );
@@ -160,7 +167,7 @@ CREATE TABLE Verkauft (
 
 -- Tabelle: wird-verkauft (Alias, Telefonnummer, ProduktNummer)
 CREATE TABLE Wird_Verkauft (
-    Alias VARCHAR2(15),
+    Alias VARCHAR2(20),
     Telefonnummer VARCHAR2(15),
     ProduktNummer VARCHAR2(6),
     CONSTRAINT fk_WirdVerkauft_Kunde FOREIGN KEY (Alias) REFERENCES Kartell_Kunde(Alias),

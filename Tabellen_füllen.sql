@@ -1,114 +1,108 @@
--- KartellMitarbeiter Tabelle
-INSERT INTO Kartell_Mitarbeiter (MitarbeiterNummer, Name, Status, Gehalt, Eintrittsdatum, Telefonnummer, Adresse) VALUES
-('M00001', 'Max Mustermann', 'beschäftigt', 5000.00, TO_DATE('2015-01-01', 'YYYY-MM-DD'), '1234567890', 'Musterstraße 1');
-INSERT INTO Kartell_Mitarbeiter (MitarbeiterNummer, Name, Status, Gehalt, Eintrittsdatum, Telefonnummer, Adresse) VALUES
-('M00002', 'Anna Müller', 'verfügbar', 4500.00, TO_DATE('2018-06-15', 'YYYY-MM-DD'), '2345678901', 'Beispielweg 5');
-INSERT INTO Kartell_Mitarbeiter (MitarbeiterNummer, Name, Status, Gehalt, Eintrittsdatum, Telefonnummer, Adresse) VALUES
-('M00003', 'Peter Schmidt', 'auf Regierungsliste', 0.00, TO_DATE('2020-03-10', 'YYYY-MM-DD'), '3456789012', 'Hauptstraße 10');
-INSERT INTO Kartell_Mitarbeiter (MitarbeiterNummer, Name, Status, Gehalt, Eintrittsdatum, Telefonnummer, Adresse) VALUES
-('M00004', 'Julia Fischer', 'beschäftigt', 5200.00, TO_DATE('2017-09-23', 'YYYY-MM-DD'), '4567890123', 'Nebenstraße 2');
-INSERT INTO Kartell_Mitarbeiter (MitarbeiterNummer, Name, Status, Gehalt, Eintrittsdatum, Telefonnummer, Adresse) VALUES
-('M00005', 'Daniel Weber', 'in Verwahrung', 0.00, TO_DATE('2019-11-01', 'YYYY-MM-DD'), '5678901234', 'Versteckplatz 7');
-INSERT INTO Kartell_Mitarbeiter (MitarbeiterNummer, Name, Status, Gehalt, Eintrittsdatum, Telefonnummer, Adresse) VALUES
-('M00006', 'Lisa Schubert', 'verfügbar', 4800.00, TO_DATE('2021-05-10', 'YYYY-MM-DD'), '6789012345', 'Sonnengasse 12');
+-- 1. Tabellen mit Eltern-Schlüsseln (Primärschlüssel) füllen
+
+-- Kartell_Mitarbeiter (MitarbeiterNummer, Name, Status, Gehalt, Eintrittsdatum, Telefonnummer, Adresse)
+INSERT INTO Kartell_Mitarbeiter (MitarbeiterNummer, Name, Status, Gehalt, Eintrittsdatum, Telefonnummer, Adresse)
+VALUES ('M001', 'Max Mustermann', 'verfügbar', 3500.00, TO_DATE('2021-05-10', 'YYYY-MM-DD'), '1234567890', 'Musterstraße 1');
+INSERT INTO Kartell_Mitarbeiter (MitarbeiterNummer, Name, Status, Gehalt, Eintrittsdatum, Telefonnummer, Adresse)
+VALUES ('M002', 'Erika Musterfrau', 'beschäftigt', 5000.00, TO_DATE('2020-03-15', 'YYYY-MM-DD'), '0987654321', 'Hauptstraße 5');
+
+-- Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
+INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
+VALUES ('Drogen ABC', 'Pulver', 'Zutat A, Zutat B', 60, 80, 5);
+INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
+VALUES ('Drogen XYZ', 'Flüssigkeit', 'Zutat C, Zutat D', 45, 50, 3);
+
+-- Lagerart (LagerTyp, MaximaleKapazitaet, InventarWechselIntervall, BesuchsIntervall)
+INSERT INTO Lagerart (LagerTyp, MaximaleKapazitaet, InventarWechselIntervall, BesuchsIntervall)
+VALUES ('Lager A', 1000, 30, 15);
+INSERT INTO Lagerart (LagerTyp, MaximaleKapazitaet, InventarWechselIntervall, BesuchsIntervall)
+VALUES ('Lager B', 500, 45, 20);
+
+-- 2. Weitere Tabellen füllen, die auf die primären Schlüssel der vorherigen Tabellen verweisen
+
+-- Chemiker (ChemikerNummer, MitarbeiterNummer, Bildungsgrad, Unfallrate, notwendigeAssistenten)
+INSERT INTO Chemiker (ChemikerNummer, MitarbeiterNummer, Bildungsgrad, Unfallrate, notwendigeAssistenten)
+VALUES ('C001', 'M001', 'Doktor', 15, 2);
+INSERT INTO Chemiker (ChemikerNummer, MitarbeiterNummer, Bildungsgrad, Unfallrate, notwendigeAssistenten)
+VALUES ('C002', 'M002', 'Diplom', 10, 1);
+
+-- Schmuggler (SchmugglerNummer, MitarbeiterNummer, Route, Risikobereitschaft, Verschwiegenheit)
+INSERT INTO Schmuggler (SchmugglerNummer, MitarbeiterNummer, Route, Risikobereitschaft, Verschwiegenheit)
+VALUES ('S001', 'M001', 'Route 66', 75, 'verschwiegen');
+INSERT INTO Schmuggler (SchmugglerNummer, MitarbeiterNummer, Route, Risikobereitschaft, Verschwiegenheit)
+VALUES ('S002', 'M002', 'Route 42', 50, 'bestechlich');
+
+-- Vertriebler (VertrieblerNummer, MitarbeiterNummer, Charismalevel, Quote, verpassteQuoten)
+INSERT INTO Vertriebler (VertrieblerNummer, MitarbeiterNummer, Charismalevel, Quote, verpassteQuoten)
+VALUES ('V001', 'M001', 8, 150, 3);
+INSERT INTO Vertriebler (VertrieblerNummer, MitarbeiterNummer, Charismalevel, Quote, verpassteQuoten)
+VALUES ('V002', 'M002', 6, 120, 5);
+
+-- Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
+INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
+VALUES ('K001', '01123456789', TO_DATE('2021-06-01', 'YYYY-MM-DD'), 'Drogen ABC, Drogen XYZ');
+INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
+VALUES ('K002', '02234567890', TO_DATE('2022-07-15', 'YYYY-MM-DD'), 'Drogen PQR, Drogen DEF');
+
+-- Lager_Inventar (LagerNummer, Startdatum, Geheimhaltungsstatus, Ort, Groeße, Einlagerungsdatum, LagerTyp)
+INSERT INTO Lager_Inventar (LagerNummer, Startdatum, Geheimhaltungsstatus, Ort, Groeße, Einlagerungsdatum, LagerTyp)
+VALUES ('L001', TO_DATE('2021-01-01', 'YYYY-MM-DD'), 'unbekannt', 'Ort 1', 100, TO_DATE('2021-01-15', 'YYYY-MM-DD'), 'Lager A');
+INSERT INTO Lager_Inventar (LagerNummer, Startdatum, Geheimhaltungsstatus, Ort, Groeße, Einlagerungsdatum, LagerTyp)
+VALUES ('L002', TO_DATE('2022-02-20', 'YYYY-MM-DD'), 'vermutet', 'Ort 2', 200, TO_DATE('2022-02-25', 'YYYY-MM-DD'), 'Lager B');
+
+-- 3. Tabellen füllen, die auf bereits erstellte Schlüssel referenzieren
+
+-- Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial)
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial)
+VALUES ('P001', 100.00, TO_DATE('2021-05-01', 'YYYY-MM-DD'), 1, 90);
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial)
+VALUES ('P002', 150.00, TO_DATE('2022-06-10', 'YYYY-MM-DD'), 2, 80);
+
+-- Labor (LaborNummer, Standort, Ausstattung, Kochplaetze, Sicherheitslevel)
+INSERT INTO Labor (LaborNummer, Standort, Ausstattung, Kochplaetze, Sicherheitslevel)
+VALUES ('L001', 'Labor A', 'Ausrüstung A', 5, 8);
+INSERT INTO Labor (LaborNummer, Standort, Ausstattung, Kochplaetze, Sicherheitslevel)
+VALUES ('L002', 'Labor B', 'Ausrüstung B', 3, 6);
+
+-- Wird_Hergestellt (Bezeichnung, LaborNummer)
+INSERT INTO Wird_Hergestellt (Bezeichnung, LaborNummer)
+VALUES ('Drogen ABC', 'L001');
+INSERT INTO Wird_Hergestellt (Bezeichnung, LaborNummer)
+VALUES ('Drogen XYZ', 'L002');
+
+-- Kann_Herstellen (Bezeichnung, ChemikerNummer)
+INSERT INTO Kann_Herstellen (Bezeichnung, ChemikerNummer)
+VALUES ('Drogen ABC', 'C001');
+INSERT INTO Kann_Herstellen (Bezeichnung, ChemikerNummer)
+VALUES ('Drogen XYZ', 'C002');
+
+-- Besitzt (ProduktNummer, LagerNummer)
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P001', 'L001');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P002', 'L002');
+
+-- Transportiert (SchmugglerNummer, LagerNummer)
+INSERT INTO Transportiert (SchmugglerNummer, LagerNummer)
+VALUES ('S001', 'L001');
+INSERT INTO Transportiert (SchmugglerNummer, LagerNummer)
+VALUES ('S002', 'L002');
+
+-- Verkauft (VertrieblerNummer, LagerNummer)
+INSERT INTO Verkauft (VertrieblerNummer, LagerNummer)
+VALUES ('V001', 'L001');
+INSERT INTO Verkauft (VertrieblerNummer, LagerNummer)
+VALUES ('V002', 'L002');
+
+-- Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('K001', '01123456789', 'P001');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('K002', '02234567890', 'P002');
+
+-- Kennt (VertrieblerNummer, LagerTyp)
+INSERT INTO Kennt (VertrieblerNummer, LagerTyp)
+VALUES ('V001', 'Lager A');
+INSERT INTO Kennt (VertrieblerNummer, LagerTyp)
+VALUES ('V002', 'Lager B');
 COMMIT;
-
-
-
--- Chemiker Tabelle
-INSERT INTO Chemiker (ChemikerNummer, MitarbeiterNummer, Bildungsgrad, Unfallrate, notwendigeAssistenten) VALUES
-('C00001', 'M00001', 'Diplom', 5, 3);
-INSERT INTO Chemiker (ChemikerNummer, MitarbeiterNummer, Bildungsgrad, Unfallrate, notwendigeAssistenten) VALUES
-('C00002', 'M00002', 'Doktor', 10, 2);
-INSERT INTO Chemiker (ChemikerNummer, MitarbeiterNummer, Bildungsgrad, Unfallrate, notwendigeAssistenten) VALUES
-('C00003', 'M00004', 'Professor', 3, 1);
-INSERT INTO Chemiker (ChemikerNummer, MitarbeiterNummer, Bildungsgrad, Unfallrate, notwendigeAssistenten) VALUES
-('C00004', 'M00006', 'Andere', 7, 4);
-Commit;
-
-INSERT INTO Schmuggler (SchmugglerNummer, MitarbeiterNummer, Route, Risikobereitschaft, Verschwiegenheit) VALUES
-('S00001', 'M00003', 'Route A, Route B', 85, 'verschwiegen');
-INSERT INTO Schmuggler (SchmugglerNummer, MitarbeiterNummer, Route, Risikobereitschaft, Verschwiegenheit) VALUES
-('S00002', 'M00005', 'Route C', 60, 'Plaudertasche');
-INSERT INTO Schmuggler (SchmugglerNummer, MitarbeiterNummer, Route, Risikobereitschaft, Verschwiegenheit) VALUES
-('S00003', 'M00006', 'Route D, Route E', 70, 'bestechlich');
-COMMIT;
-
-
--- Vertriebler Tabelle
-INSERT INTO Vertriebler (VertrieblerNummer, MitarbeiterNummer, Charismalevel, Quote, verpassteQuoten) VALUES
-('V00001', 'M00002', 8, 30000, 2);
-INSERT INTO Vertriebler (VertrieblerNummer, MitarbeiterNummer, Charismalevel, Quote, verpassteQuoten) VALUES
-('V00002', 'M00004', 7, 25000, 3);
-INSERT INTO Vertriebler (VertrieblerNummer, MitarbeiterNummer, Charismalevel, Quote, verpassteQuoten) VALUES
-('V00003', 'M00006', 6, 20000, 1);
-COMMIT;
-
-
--- KartellKunde Tabelle
-INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf) VALUES
-('Kunde001', '111222333', TO_DATE('2020-01-10', 'YYYY-MM-DD'), 'Produkt001:20');
-INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf) VALUES
-('Kunde002', '444555666', TO_DATE('2021-06-15', 'YYYY-MM-DD'), 'Produkt002:15');
-INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf) VALUES
-('Kunde003', '777888999', TO_DATE('2022-08-20', 'YYYY-MM-DD'), 'Produkt003:10');
-INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf) VALUES
-('Kunde004', '123456789', TO_DATE('2023-03-10', 'YYYY-MM-DD'), 'Produkt004:30');
-COMMIT;
-
-
--- Lagerart Tabelle
-INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf) VALUES
-('Kunde001', '111222333', TO_DATE('2020-01-10', 'YYYY-MM-DD'), 'Produkt001:20');
-INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf) VALUES
-('Kunde002', '444555666', TO_DATE('2021-06-15', 'YYYY-MM-DD'), 'Produkt002:15');
-INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf) VALUES
-('Kunde003', '777888999', TO_DATE('2022-08-20', 'YYYY-MM-DD'), 'Produkt003:10');
-INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf) VALUES
-('Kunde004', '123456789', TO_DATE('2023-03-10', 'YYYY-MM-DD'), 'Produkt004:30');
-COMMIT;
-
--- Lager_inventar Tabelle
-INSERT INTO Lager_inventar (InventarID, LagerNummer, Größe, Einlagerungsdatum) VALUES
-(1, 'L00001', 500, TO_DATE('2023-01-01', 'YYYY-MM-DD'));
-INSERT INTO Lager_inventar (InventarID, LagerNummer, Größe, Einlagerungsdatum) VALUES
-(2, 'L00002', 1200, TO_DATE('2023-02-01', 'YYYY-MM-DD'));
-INSERT INTO Lager_inventar (InventarID, LagerNummer, Größe, Einlagerungsdatum) VALUES
-(3, 'L00003', 800, TO_DATE('2023-03-15', 'YYYY-MM-DD'));
-INSERT INTO Lager_inventar (InventarID, LagerNummer, Größe, Einlagerungsdatum) VALUES
-(4, 'L00004', 1500, TO_DATE('2023-04-10', 'YYYY-MM-DD'));
-COMMIT;
-
-
--- Drogenart Tabelle
-INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel) VALUES
-('Meth', 'Flüssigkeit', 'Zutat1,Zutat2', 120, 95, 9);
-INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel) VALUES
-('Kokain', 'Pulver', 'Zutat3,Zutat4', 90, 80, 8);
-INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel) VALUES
-('LSD', 'Aerosol', 'Zutat5,Zutat6', 60, 70, 7);
-INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel) VALUES
-('Heroin', 'Feststoff', 'Zutat7,Zutat8', 150, 99, 10);
-COMMIT;
-
-
--- Produkt Tabelle
-INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial) VALUES
-('Produkt001', 200, TO_DATE('2022-12-10', 'YYYY-MM-DD'), 20, 90);
-INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial) VALUES
-('Produkt002', 250, TO_DATE('2023-01-15', 'YYYY-MM-DD'), 15, 85);
-INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial) VALUES
-('Produkt003', 300, TO_DATE('2023-02-20', 'YYYY-MM-DD'), 10, 80);
-INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial) VALUES
-('Produkt004', 350, TO_DATE('2023-03-25', 'YYYY-MM-DD'), 5, 95);
-COMMIT;
-
--- Labor Tabelle
-INSERT INTO Labor (LaborNummer, Standort, Ausstattung, Kochplaetze, Sicherheitslevel) VALUES
-('LAB001', 'Berlin', 'Standard', 5, 7);
-INSERT INTO Labor (LaborNummer, Standort, Ausstattung, Kochplaetze, Sicherheitslevel) VALUES
-('LAB002', 'München', 'Erweitert', 8, 8);
-INSERT INTO Labor (LaborNummer, Standort, Ausstattung, Kochplaetze, Sicherheitslevel) VALUES
-('LAB003', 'Hamburg', 'Hochsicher', 10, 9);
-COMMIT;
-
