@@ -29,6 +29,8 @@ INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigke
 VALUES ('Meth', 'Kristall', 'Zutat C, Zutat D', 240, 95, 10);
 INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
 VALUES ('Heroin', 'Feststoff', 'Zutat C, Zutat D', 120, 100, 6);
+INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
+VALUES ('Ecstasy', 'Pille', 'Zutat C, Zutat D', 40, 25, 4);
 
 -- Lagerart (LagerTyp, MaximaleKapazitaet, InventarWechselIntervall, BesuchsIntervall)
 INSERT INTO Lagerart (LagerTyp, MaximaleKapazitaet, InventarWechselIntervall, BesuchsIntervall)
@@ -66,21 +68,21 @@ VALUES ('V002', 'K007', 6, 120, 7);
 
 -- Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
 INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
-VALUES ('Viktor', '01123456789', TO_DATE('2021-06-01', 'YYYY-MM-DD'), 'Drogen ABC, Drogen XYZ');
+VALUES ('Viktor', '01123456789', TO_DATE('2021-06-01', 'YYYY-MM-DD'), 'Lachgas, LSD');
 INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
-VALUES ('Brenner', '11234567890', TO_DATE('2022-06-25', 'YYYY-MM-DD'), 'Drogen PQR, Drogen DEF');
+VALUES ('Brenner', '11234567890', TO_DATE('2022-06-25', 'YYYY-MM-DD'), 'Meth, Heroin, Speed');
 INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
-VALUES ('Meise', '56234567430', TO_DATE('2023-07-11', 'YYYY-MM-DD'), 'Drogen PQR, Drogen DEF');
+VALUES ('Meise', '56234567430', TO_DATE('2023-07-11', 'YYYY-MM-DD'), 'Kokain');
 INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
-VALUES ('Typ ohne Hose', '10534567777', TO_DATE('2024-02-18', 'YYYY-MM-DD'), 'Drogen PQR, Drogen DEF');
+VALUES ('Typ ohne Hose', '10534567777', TO_DATE('2024-02-18', 'YYYY-MM-DD'), 'Speed, Lachgas');
 INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
-VALUES ('Der Professor', '86234567567', TO_DATE('2023-09-11', 'YYYY-MM-DD'), 'Drogen PQR, Drogen DEF');
+VALUES ('Der Professor', '86234567567', TO_DATE('2023-09-11', 'YYYY-MM-DD'), 'LSD');
 INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
-VALUES ('Labersack', '33034567840', TO_DATE('2021-03-22', 'YYYY-MM-DD'), 'Drogen PQR, Drogen DEF');
+VALUES ('Labersack', '33034567840', TO_DATE('2021-03-22', 'YYYY-MM-DD'), 'Kokain, Speed');
 INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
-VALUES ('das Gesicht', '59034567897', TO_DATE('2024-12-09', 'YYYY-MM-DD'), 'Drogen PQR, Drogen DEF');
+VALUES ('das Gesicht', '59034567897', TO_DATE('2024-12-09', 'YYYY-MM-DD'), 'Meth, Kokain, Speed');
 INSERT INTO Kartell_Kunde (Alias, Telefonnummer, Erstkaufdatum, Einkaufsverlauf)
-VALUES ('Suchtibert', '44134567223', TO_DATE('2020-5-01', 'YYYY-MM-DD'), 'Drogen PQR, Drogen DEF');
+VALUES ('Suchtibert', '44134567223', TO_DATE('2020-5-01', 'YYYY-MM-DD'), 'Lachgas, Speed, Heroin, LSD, Kokain, Meth');
 
 -- Lager_Inventar (LagerNummer, Startdatum, Geheimhaltungsstatus, Ort, Groeße, Einlagerungsdatum, LagerTyp)
 INSERT INTO Lager_Inventar (LagerNummer, Startdatum, Geheimhaltungsstatus, Ort, Groeße, Einlagerungsdatum, LagerTyp)
@@ -161,6 +163,31 @@ INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Suchtibert', '44134567223', 'P001');
 INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Meise', '56234567430', 'P002');
+/*INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Suchtibert', '44134567223', 'P003');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Viktor', '01123456789', 'P004');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Brenner', '11234567890', 'P005');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Labersack', '33034567840', 'P006');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Der Professor', '86234567567', 'P007');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Suchtibert', '44134567223', 'P008');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Suchtibert', '44134567223', 'P009');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Typ ohne Hose', '10534567777', 'P010');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Das Gesicht', '59034567897', 'P011');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Der Professor', '86234567567', 'P012');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Meise', '56234567430', 'P013');
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+VALUES ('Viktor', '01123456789', 'P014');
+*/
 
 -- Kennt (VertrieblerNummer, LagerTyp)
 INSERT INTO Kennt (VertrieblerNummer, LagerTyp)
