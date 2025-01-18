@@ -94,9 +94,33 @@ VALUES ('LG002', TO_DATE('2022-02-20', 'YYYY-MM-DD'), 'vermutet', 'Breitenfeld',
 
 -- Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, C-Nr., Bezeichnung)
 INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
-VALUES ('P001', 100.00, TO_DATE('2024-05-01', 'YYYY-MM-DD'), 1, 90, 'C001', 'Meth');
+VALUES ('P001', 180.00, TO_DATE('2024-05-01', 'YYYY-MM-DD'), 1, 2, 'C001', 'Meth');
 INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
-VALUES ('P002', 150.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 6, 20, 'C002', 'Lachgas');
+VALUES ('P002', 40.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 4, 40, 'C002', 'Kokain');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P003', 10.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 0, 0, 'C002', 'Lachgas');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P004', 10.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 0, 0, 'C002', 'Lachgas');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P005', 149.99, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 3, 16, 'C002', 'Meth');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P006', 80.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 5, 50, 'C001', 'Speed');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P007', 64.49, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 2, 15, 'C001', 'LSD');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P008', 210.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 1, 1, 'C001', 'Heroin');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P009', 30.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 5, 23, 'C002', 'Speed');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P010', 34.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 2, 20, 'C001', 'Speed');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P011', 130.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 7, 22, 'C002', 'Meth');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P012', 38.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 4, 20, 'C002', 'LSD');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P013', 22.95, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 8, 80, 'C001', 'Kokain');
+INSERT INTO Produkt (ProduktNummer, Preis, Herstellungsdatum, Streckungsgrad, Gefahrenpotenzial, Chemiker, Bezeichner)
+VALUES ('P014', 45.00, TO_DATE('2024-06-10', 'YYYY-MM-DD'), 5, 45, 'C001', 'LSD');
 
 -- Labor (LaborNummer, Standort, Ausstattung, Kochplaetze, Sicherheitslevel)
 INSERT INTO Labor (LaborNummer, Standort, Ausstattung, Kochplaetze, Sicherheitslevel)
@@ -145,6 +169,30 @@ INSERT INTO Besitzt (ProduktNummer, LagerNummer)
 VALUES ('P001', 'LG001');
 INSERT INTO Besitzt (ProduktNummer, LagerNummer)
 VALUES ('P002', 'LG002');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P003', 'LG002');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P004', 'LG001');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P005', 'LG002');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P006', 'LG001');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P007', 'LG001');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P008', 'LG001');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P009', 'LG002');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P010', 'LG002');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P011', 'LG001');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P012', 'LG002');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P013', 'LG001');
+INSERT INTO Besitzt (ProduktNummer, LagerNummer)
+VALUES ('P014', 'LG001');
 
 -- Transportiert (SchmugglerNummer, LagerNummer)
 INSERT INTO Transportiert (SchmugglerNummer, LagerNummer)
@@ -163,7 +211,7 @@ INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Suchtibert', '44134567223', 'P001');
 INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Meise', '56234567430', 'P002');
-/*INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
+INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Suchtibert', '44134567223', 'P003');
 INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Viktor', '01123456789', 'P004');
@@ -180,14 +228,13 @@ VALUES ('Suchtibert', '44134567223', 'P009');
 INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Typ ohne Hose', '10534567777', 'P010');
 INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
-VALUES ('Das Gesicht', '59034567897', 'P011');
+VALUES ('das Gesicht', '59034567897', 'P011');
 INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Der Professor', '86234567567', 'P012');
 INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Meise', '56234567430', 'P013');
 INSERT INTO Wird_Verkauft (Alias, Telefonnummer, ProduktNummer)
 VALUES ('Viktor', '01123456789', 'P014');
-*/
 
 -- Kennt (VertrieblerNummer, LagerTyp)
 INSERT INTO Kennt (VertrieblerNummer, LagerTyp)

@@ -1,4 +1,4 @@
--- View 1: Gesamtausgaben Kunden
+-- View 1: Gesamtkäufe Kunden
 CREATE OR REPLACE VIEW Kunden_Produkte_Ausgaben AS
 SELECT 
     k.Alias AS Kunde,
@@ -15,9 +15,26 @@ JOIN
 JOIN 
     Produkt p ON wv.ProduktNummer = p.ProduktNummer
 GROUP BY 
-    k.Alias, k.Telefonnummer, wv.ProduktNummer, p.Bezeichner, p.Preis;
+    k.Alias, k.Telefonnummer, wv.ProduktNummer, p.Bezeichner, p.Preis
+ORDER BY 
+    k.Alias;
 
--- View 2: Restkapazität der genutzten Lager
+-- View 2: Gesamtausgaben
+CREATE OR REPLACE VIEW Kunden_Gesamtausgaben AS
+SELECT 
+    k.Alias AS Kunde,
+    k.Telefonnummer,
+    SUM(p.Preis) AS Gesamtausgabe
+FROM 
+    Kartell_Kunde k
+JOIN 
+    Wird_Verkauft wv ON k.Alias = wv.Alias
+JOIN 
+    Produkt p ON wv.ProduktNummer = p.ProduktNummer
+GROUP BY 
+    k.Alias, k.Telefonnummer;
+
+-- View 3: Restkapazität der genutzten Lager
 CREATE OR REPLACE VIEW Schmuggler_Lager_Kapazitaet AS
 SELECT 
     s.SchmugglerNummer,
