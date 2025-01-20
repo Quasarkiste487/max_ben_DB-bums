@@ -18,19 +18,19 @@ VALUES ('K007', 'Matthes Böttcher', 'verfügbar', 5200.45, TO_DATE('2024-03-15'
 
 -- Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
 INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
-VALUES ('Kokain', 'Pulver', 'Zutat A, Zutat B', 180, 80, 1);
+VALUES ('Kokain', 'Pulver', 'Kerosin, Kokapflanze', 180, 80, 1);
 INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
-VALUES ('Speed', 'Flüssigkeit', 'Zutat C, Zutat D', 30, 50, 5);
+VALUES ('Speed', 'Flüssigkeit', 'Koffein, Ephedrin, Paracetamol, Amphetamin', 30, 50, 5);
 INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
-VALUES ('LSD', 'Pille', 'Zutat C, Zutat D', 90, 20, 3);
+VALUES ('LSD', 'Pille', 'Kohlenstoff, Wasserstoff, Stickstoff', 90, 20, 3);
 INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
-VALUES ('Lachgas', 'Aerosol', 'Zutat C, Zutat D', 45, 5, 2);
+VALUES ('Lachgas', 'Aerosol', 'Stickstoff, Sauerstoff', 45, 5, 2);
 INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
-VALUES ('Meth', 'Kristall', 'Zutat C, Zutat D', 240, 95, 10);
+VALUES ('Meth', 'Kristall', 'Ephedrin, Ammoniak-Hydroxid', 240, 95, 10);
 INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
-VALUES ('Heroin', 'Feststoff', 'Zutat C, Zutat D', 120, 100, 6);
+VALUES ('Heroin', 'Feststoff', 'Schlafmohn, Ammoniumchlorid', 120, 100, 6);
 INSERT INTO Drogenart (Bezeichnung, Aggregatsart, Zutaten, Kochzeit, Abhaengigkeitsfaktor, KochGefahrenlevel)
-VALUES ('Ecstasy', 'Pille', 'Zutat C, Zutat D', 40, 25, 4);
+VALUES ('Ecstasy', 'Pille', '3,4-Methylendioxy-N-methylamphetamin', 40, 25, 4);
 
 -- Lagerart (LagerTyp, MaximaleKapazitaet, InventarWechselIntervall, BesuchsIntervall)
 INSERT INTO Lagerart (LagerTyp, MaximaleKapazitaet, InventarWechselIntervall, BesuchsIntervall)
@@ -89,6 +89,10 @@ INSERT INTO Lager_Inventar (LagerNummer, Startdatum, Geheimhaltungsstatus, Ort, 
 VALUES ('LG001', TO_DATE('2021-01-01', 'YYYY-MM-DD'), 'unbekannt', 'Leipzig', 1000, TO_DATE('2021-01-15', 'YYYY-MM-DD'), 'Container');
 INSERT INTO Lager_Inventar (LagerNummer, Startdatum, Geheimhaltungsstatus, Ort, Groeße, Einlagerungsdatum, LagerTyp)
 VALUES ('LG002', TO_DATE('2022-02-20', 'YYYY-MM-DD'), 'vermutet', 'Breitenfeld', 400, TO_DATE('2022-02-25', 'YYYY-MM-DD'), 'Werkstatt');
+INSERT INTO Lager_Inventar (LagerNummer, Startdatum, Geheimhaltungsstatus, Ort, Groeße, Einlagerungsdatum, LagerTyp)
+VALUES ('LG003', TO_DATE('2022-03-15', 'YYYY-MM-DD'), 'entdeckt', 'Hauptbahnhof Dresden', 10, TO_DATE('2023-12-02', 'YYYY-MM-DD'), 'Toter Briefkasten');
+INSERT INTO Lager_Inventar (LagerNummer, Startdatum, Geheimhaltungsstatus, Ort, Groeße, Einlagerungsdatum, LagerTyp)
+VALUES ('LG004', TO_DATE('2024-08-11', 'YYYY-MM-DD'), 'unbekannt', 'Gohlis', 5, TO_DATE('2024-08-12', 'YYYY-MM-DD'), 'Dünndarm');
 
 -- 3. Tabellen füllen, die auf bereits erstellte Schlüssel referenzieren
 

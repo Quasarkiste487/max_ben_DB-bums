@@ -20,12 +20,12 @@ DROP TABLE besitzt CASCADE CONSTRAINTS;
 -- Tabelle: Kartell-Mitarbeiter
 CREATE TABLE Kartell_Mitarbeiter (
     MitarbeiterNummer VARCHAR2(10) PRIMARY KEY,
-    Name VARCHAR2(50) NOT NULL,  -- Erhöht, um längere Namen zu ermöglichen
+    Name VARCHAR2(50) NOT NULL, 
     Status VARCHAR2(20) CHECK (Status IN ('verfügbar', 'beschäftigt', 'auf Regierungsliste', 'in Verwahrung')) NOT NULL,
-    Gehalt NUMBER(8,2),  -- Erhöht für größere Gehälter
+    Gehalt NUMBER(8,2),
     Eintrittsdatum DATE NOT NULL,
-    Telefonnummer VARCHAR2(15),  -- Erhöht für internationale Nummern
-    Adresse VARCHAR2(100) NOT NULL  -- Erhöht für längere Adressen
+    Telefonnummer VARCHAR2(15),
+    Adresse VARCHAR2(100) NOT NULL
 );
 
 -- Tabelle: Chemiker (Spezialisierung von Kartell-Mitarbeiter)
@@ -60,7 +60,7 @@ CREATE TABLE Vertriebler (
 
 -- Tabelle: Kartell-Kunde
 CREATE TABLE Kartell_Kunde (
-    Alias VARCHAR2(20) PRIMARY KEY,  -- Erhöht für längere Aliase
+    Alias VARCHAR2(20) PRIMARY KEY,
     Telefonnummer VARCHAR2(15) NOT NULL,
     Erstkaufdatum DATE NOT NULL,
     Einkaufsverlauf VARCHAR2(255)
@@ -99,7 +99,7 @@ CREATE TABLE Drogenart (
 -- Tabelle: Produkt
 CREATE TABLE Produkt (
     ProduktNummer VARCHAR2(6) PRIMARY KEY,
-    Preis NUMBER(8,2),  -- Erhöht für größere Preisspannen
+    Preis NUMBER(8,2),
     Herstellungsdatum DATE NOT NULL,
     Streckungsgrad NUMBER(3,0),
     Gefahrenpotenzial NUMBER(3,0) CHECK (Gefahrenpotenzial BETWEEN 0 AND 100),
@@ -112,7 +112,7 @@ CREATE TABLE Produkt (
 -- Tabelle: Labor
 CREATE TABLE Labor (
     LaborNummer VARCHAR2(6) PRIMARY KEY,
-    Standort VARCHAR2(50) NOT NULL,  -- Erhöht für längere Standorte
+    Standort VARCHAR2(50) NOT NULL,
     Ausstattung VARCHAR2(50),
     Kochplaetze NUMBER(2,0) CHECK (Kochplaetze > 0),
     Sicherheitslevel NUMBER(1,0) CHECK (Sicherheitslevel BETWEEN 0 AND 9)
